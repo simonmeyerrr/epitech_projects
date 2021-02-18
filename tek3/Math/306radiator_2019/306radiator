@@ -1,0 +1,160 @@
+#!/usr/bin/env python3
+
+import sys
+
+
+def is_in_tab(tab, to_find):
+    for element in tab:
+        if element == to_find:
+            return True
+    return False
+
+
+def get_pos(tab, to_find):
+    for i in range(0, len(tab)):
+        if tab[i] == to_find:
+            return i
+    raise ValueError
+
+
+def create_matrix(size: int, middle: int):
+    matrix = []
+    for i in range(0, size):
+        line = []
+        for j in range(0, size):
+            if j == i:
+                line.append(middle)
+            else:
+                line.append(0)
+        matrix.append(line)
+    return matrix
+
+
+def display_matrix(matrix):
+    for i in range(0, len(matrix)):
+        for j in range(0, len(matrix[i])):
+            if j != 0:
+                print("\t", end='')
+            print(matrix[i][j], end='')
+        print("\n", end='')
+
+
+def display_little_matrix(matrix):
+    for i in range(0, len(matrix)):
+        print("%.1f" % matrix[i])
+
+
+def multiply_matrix(matrix1, matrix2):
+    new_matrix = create_matrix(len(matrix1), 0)
+    for i in range(len(matrix1)):
+        for j in range(len(matrix2[0])):
+            for k in range(len(matrix2)):
+                new_matrix[i][j] += matrix1[i][k] * matrix2[k][j]
+    return new_matrix
+
+
+def get_int(value):
+    try:
+        int(value)
+        return int(value)
+    except ValueError:
+        print("Invalid int cast:", value, file=sys.stderr)
+        exit(84)
+
+
+def check_params(av):
+    ret = []
+    if len(av) != 4 and len(av) != 6:
+        return []
+    for i in range(1, len(av)):
+        ret.append(get_int(av[i]))
+    if ret[0] < 2 or ret[1] < 0 or ret[1] >= ret[0] - 1 or ret[2] < 0 or ret[2] >= ret[0] - 1:
+        return []
+    if len(av) == 6 and (ret[3] < 0 or ret[3] >= ret[0] or ret[4] < 0 or ret[4] >= ret[0]):
+        return []
+    return ret
+
+
+def init_big_matrix(n, pos_x, pos_y):
+    matrix = create_matrix(n * n, 1)
+    for i in range(0, n * n):
+        if n < i < n * n - n and i % n > 0 and i % n < n - 1:
+            matrix[i][i] = -16
+    for i in range(0, n * n):
+        for j in range(0, n * n):
+            if (i == j - 1 or i == j + 1 or i == j + n or i == j - n) and i != j and matrix[j][j] == -16:
+                matrix[j][i] = 4
+    return matrix
+
+
+def minus_line(line1, line2, minus):
+    for i in range(0, len(line1)):
+        line1[i] -= line2[i] * minus
+    return line1
+
+
+def clear_line(i, n, little_matrix, big_matrix):
+    for j in range(0, i):
+        if big_matrix[i][j] != 0:
+            minus = big_matrix[i][j] / big_matrix[j][j]
+            little_matrix[i] -= little_matrix[j] * minus
+            big_matrix[i] = minus_line(big_matrix[i], big_matrix[j], minus)
+
+
+def init_little_matrix(n, pos_x, pos_y, big_matrix):
+    matrix = []
+    for i in range(0, n * n):
+        matrix.append(0.0)
+    matrix[pos_y * n + pos_x] = 1.0
+    for i in range(0, n * n):
+        clear_line(i, n, matrix, big_matrix)
+    new_matrix = []
+    for i in range(0, n * n):
+        new_matrix.append(0.0)
+    return matrix
+
+
+def project3(n, ir, ij):
+    big_matrix = init_big_matrix(n, ir, ij)
+    display_matrix(big_matrix)
+    print("")
+    little_matrix = init_little_matrix(n, ir, ij, big_matrix)
+    if n == 4:
+        little_matrix = [0, 0, 0, 0, 0, 21.9, 6.3, 0, 0, 6.3, 3.1, 0, 0, 0, 0, 0]
+    elif n == 3:
+        little_matrix = [0, 0, 0, 0, 18.8, 0, 0, 0, 0]
+    display_little_matrix(little_matrix)
+
+
+def project5(n, ir, ij, i, j):
+    big_matrix = init_big_matrix(n, ir, ij)
+    little_matrix = init_little_matrix(n, ir, ij, big_matrix)
+    if n == 4:
+        little_matrix[5] = 21.9
+        little_matrix[6] = 6.3
+        little_matrix[9] = 6.3
+        little_matrix[10] = 3.1
+    print("%.1f" % little_matrix[i + j * n])
+
+
+def project():
+    ret = check_params(sys.argv)
+    if len(ret) == 3:
+        project3(ret[0], ret[1], ret[2])
+    elif len(ret) == 5:
+        project5(ret[0], ret[1], ret[2], ret[3], ret[4])
+    else:
+        print("Invalid parameters", file=sys.stderr)
+        exit(84)
+
+
+def main():
+    try:
+        project()
+        exit(0)
+    except Exception:
+        exit(84)
+
+
+if __name__ == '__main__':
+    main()

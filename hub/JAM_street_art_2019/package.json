@@ -1,0 +1,23 @@
+{
+  "name": "jam_street_art_2019",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.epitech.eu:/louis.lecce@epitech.eu/JAM_street_art_2019"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async-mutex": "^0.1.4",
+    "canvas": "^2.6.1",
+    "express": "^4.17.1",
+    "express-ws": "^4.0.0",
+    "image-data-uri": "^2.0.1",
+    "uuid": "^7.0.2"
+  }
+}

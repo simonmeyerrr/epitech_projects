@@ -1,0 +1,13 @@
+monitor
+unit_tests
+
+.idea
+*.o
+*.gcno
+*.gcda
+vgcore*
+*~
+*#*
+*CMakeLists.txt
+cmake-build-debug
+MyGKrellm

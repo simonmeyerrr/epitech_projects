@@ -1,0 +1,16 @@
+201yams
+
+a.out
+main_test.c*
+
+*.a
+*.o
+*.gcda
+*.gcno
+*~
+*#
+
+.idea
+vgcore*
+CMakeLists.txt
+cmake*

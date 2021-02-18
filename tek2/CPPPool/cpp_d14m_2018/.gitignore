@@ -1,0 +1,16 @@
+a.out
+unit_tests
+main_test*
+
+Test.hpp
+MixerBase.hpp
+
+.idea
+*.test
+*.o
+*.a
+*.gcda
+*.gcno
+*~
+*#*
+CMakeList.txt

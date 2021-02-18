@@ -1,0 +1,13 @@
+tests/unit_tests
+ex01/menger
+ex02/32px.bmp
+ex04/menger_face
+ex04/test
+.idea
+*.o
+*.gcda
+*.gcno
+*~
+*#*
+*/a.out
+*/main_test.c

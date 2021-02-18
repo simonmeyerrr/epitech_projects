@@ -1,0 +1,14 @@
+client
+utils
+
+*.a
+*.o
+*.gcda
+*.gcno
+*~
+*#
+
+.idea
+vgcore*
+CMakeLists.txt
+cmake*

@@ -1,0 +1,14 @@
+unit_tests
+santa
+elves
+
+*.xml
+*.o
+*.gcno
+*.gcda
+*~
+*#
+*#*
+*CMakeLists.txt
+.idea
+

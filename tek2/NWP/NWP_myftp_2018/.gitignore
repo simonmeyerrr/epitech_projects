@@ -1,0 +1,11 @@
+*.a
+*.o
+*.gcda
+*.gcno
+*~
+*#
+myftp
+.idea
+vgcore*
+CMakeLists.txt
+cmake*

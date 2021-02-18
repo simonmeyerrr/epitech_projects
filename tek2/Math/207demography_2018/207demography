@@ -1,0 +1,182 @@
+#!/usr/bin/env python3
+import sys
+import math
+
+
+def print_usage():
+    print("USAGE\n    %s code [...]\n\nDESCRIPTION" % sys.argv[0])
+    print("    code   country code")
+
+
+def check_args(av):
+    if len(av) == 2 and (av[1] == "-h" or av[1] == "--help"):
+        return 0
+    elif len(av) >= 2:
+        return 1
+    else:
+        return -1
+
+
+def read_doc():
+    doc = []
+    fd = open('207demography_data.csv', 'r')
+    if fd.mode == 'r':
+        lines = fd.read().split("\n")
+        for i in range(0, len(lines) - 1):
+            doc.append(lines[i].split(";"))
+        fd.close()
+    else:
+        print("Can't open file", file=sys.stderr)
+        exit(84)
+    return doc
+
+
+def is_doc_valid(doc):
+    if len(doc) < 2:
+        return False
+    length = len(doc[0])
+    if length < 3:
+        return False
+    for i in range(0, len(doc)):
+        if len(doc[i]) != length:
+            print(i)
+            return False
+    return doc[0][0] == "Country Name" and doc[0][1] == "Country Code"
+
+
+def get_countries(doc, av):
+    countries = []
+    for i in range(1, len(av)):
+        found = False
+        for j in range(1, len(doc)):
+            if doc[j][1] == av[i]:
+                countries.append(j)
+                found = True
+                break
+        if found is False:
+            print("Bad country code: %s" % av[i], file=sys.stderr)
+            exit(84)
+    countries.sort()
+    return countries
+
+
+def get_average(array):
+    total = 0.0
+    if len(array) == 0:
+        return 0.0
+    for i in array:
+        total += float(i)
+    return total / float(len(array))
+
+
+def get_ecarttype(array):
+    length = float(len(array))
+    average = get_average(array)
+    res = 0.0
+    for i in range(0, len(array)):
+        res += pow(array[i] - average, 2.0)
+    return math.sqrt((1.0 / length) * res)
+
+
+def get_variance(array):
+    return pow(get_ecarttype(array), 2.0)
+
+
+def get_covariance(array_x, array_y):
+    average_x = get_average(array_x)
+    average_y = get_average(array_y)
+    res = 0.0
+    for i in range(0, len(array_x)):
+        res += (array_x[i] - average_x) * (array_y[i] - average_y)
+    return (1.0 / float(len(array_x))) * res
+
+
+def get_root(array_x, array_y, a, b):
+    errors = []
+    for i in range(0, len(array_x)):
+        errors.append(array_y[i] - (a * array_x[i] + b))
+    return math.sqrt(get_ecarttype(errors))
+
+
+def get_ccl(array_x, array_y):
+    res = get_ecarttype(array_x) * get_ecarttype(array_y)
+    if res == 0.0:
+        return 0.0
+    return get_covariance(array_x, array_y) / res
+
+
+def get_results(years, people):
+    a1 = 0.0
+    if get_variance(years) != 0.0:
+        a1 = get_covariance(years, people) / get_variance(years)
+    b1 = (get_average(people) - (a1 * get_average(years))) / 1000000.0
+    a1 = a1 / 1000000.0
+    a2 = 0.0
+    if get_variance(people) != 0.0:
+        a2 = get_covariance(people, years) / get_variance(people)
+    b2 = get_average(years) - (a2 * get_average(people))
+    a2 = a2 * 1000000.0
+    print("Fit1\n    Y = %.2f" % a1, end="")
+    if b1 < 0:
+        print(" X - %.2f" % math.fabs(b1))
+    else:
+        print(" X + %.2f" % math.fabs(b1))
+    print("    Root-mean-square deviation: %.2f" % get_root(years, people, a1, b1))
+    if a1 != 0.0:
+        print("    Population in 2050: %.2f" % (2050.0 * a1 + b1))
+    else:
+        print("    Population in 2050: %.2f" % 0.0)
+    print("Fit2")
+    print("    X = %.2f" % a2, end="")
+    if b2 < 0:
+        print(" Y - %.2f" % math.fabs(b2))
+    else:
+        print(" Y + %.2f" % math.fabs(b2))
+    print("    Root-mean-square deviation: %.2f" % get_root(people, years, a2, b2))
+    if a2 != 0.0:
+        print("    Population in 2050: %.2f" % ((2050.0 - b2) / a2))
+    else:
+        print("    Population in 2050: %.2f" % 0.0)
+    print("Correlation: %.4f" % get_ccl(years, people))
+
+
+def demography(av):
+    doc = read_doc()
+    if is_doc_valid(doc) is False:
+        print("Invalid file", file=sys.stderr)
+        exit(84)
+    years = []
+    countries = get_countries(doc, av)
+    people = []
+    for i in range(2, len(doc[0])):
+        if doc[0][i].isdigit():
+            years.append(float(doc[0][i]))
+            people.append(float(0))
+        else:
+            exit(84)
+    print("Country: ", end='')
+    for i in range(0, len(countries)):
+        for j in range(2, len(doc[0])):
+            if doc[countries[i]][j].isdigit() and int(doc[countries[i]][j]) >= 0:
+                people[j - 2] += float(doc[countries[i]][j])
+        print("%s" % doc[countries[i]][0], end='')
+        if i != len(countries) - 1:
+            print(", ", end='')
+        else:
+            print("")
+    get_results(years, people)
+
+
+def main():
+    mode = check_args(sys.argv)
+    if mode == 0:
+        print_usage()
+    elif mode == 1:
+        demography(sys.argv)
+    else:
+        print_usage()
+        exit(84)
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,41 @@
+version: '3'
+services:
+  database:
+    build:
+      ./database
+    environment:
+      - MYSQL_USER=${PAUSE_SQL_USER:-pause}
+      - MYSQL_PASSWORD=${PAUSE_SQL_PASSWORD:-pausepassword}
+      - MYSQL_DATABASE=${PAUSE_SQL_DATABASE:-pause}
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    networks:
+      - app
+    ports:
+      - '3306:3306'
+
+  server:
+    build:
+      ./server
+    environment:
+      - HOST=80
+      - MYSQL_USER=${PAUSE_SQL_USER:-pause}
+      - MYSQL_PASSWORD=${PAUSE_SQL_PASSWORD:-pausepassword}
+      - MYSQL_DATABASE=${PAUSE_SQL_DATABASE:-pause}
+      - MYSQL_HOST=${PAUSE_SQL_HOST:-database}
+      - JWT_SECRET=${PAUSE_JWT_SECRET:-pausejwtsecret}
+      - URL_SERVER=${PAUSE_API_ADDRESS:-http://127.0.0.1:8080}
+    networks:
+      - app
+    ports:
+      - '8080:80'
+
+  client:
+    build:
+      ./client
+    environment:
+      - REACT_APP_API_ADDRESS=${PAUSE_API_ADDRESS:-http://127.0.0.1:8080}
+    ports:
+      - '3000:80'
+
+networks:
+  app:

@@ -1,0 +1,16 @@
+a.out
+unit_tests
+main_test*
+main.cpp
+IEncryptionMethod.hpp
+
+.idea
+*.test
+*.o
+*.a
+*.gcda
+*.gcno
+*~
+*#*
+vgcore*
+CMakeList.txt

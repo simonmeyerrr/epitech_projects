@@ -1,0 +1,51 @@
+.centerBody {
+    display: flex;
+    flex-direction: column;
+}
+
+.centerVert {
+    justify-content: center;
+}
+
+.centerHori {
+    align-items: center;
+}
+
+.title-size-Nav {
+    font-size: 30px;
+    display: flex;
+}
+
+.title-Seperation {
+    margin: 0 20px;
+}
+
+.title-Seperation:hover {
+    text-decoration: underline;
+}
+
+.button-size-Nav {
+    font-size: 21px;
+}
+
+.sizeBtn {
+    padding: 1vh;
+    transition: all 0.2s ease-out;
+}
+
+.sizeImg {
+    height: 4vh;
+    transition: all 0.2s ease-out;
+}
+
+.sizeImg:hover {
+    height: 5vh;
+    transition: all 0.2s ease-out;
+}
+
+.login-title {
+    font-size: 3vh;
+    text-align: center;
+    margin-top: 3vh;
+    margin-bottom: 2vh;
+}

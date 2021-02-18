@@ -1,0 +1,15 @@
+tests/unit_tests
+
+ex00/simple_list.h
+ex01/simple_btree.h
+
+*/a.out
+*/main_test.c
+
+*vgcore*
+.idea
+*.o
+*.gcda
+*.gcno
+*~
+*#*

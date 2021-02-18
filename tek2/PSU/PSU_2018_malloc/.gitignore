@@ -1,0 +1,17 @@
+a.out
+unit_tests
+main_test.c
+libmy_malloc.so
+bootstrap
+
+.idea
+*.test
+*.o
+*.a
+*.gcda
+*.gcno
+*~
+*#*
+vgcore*
+CMakeLists.txt
+cmake-build-debug

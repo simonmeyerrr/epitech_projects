@@ -1,0 +1,167 @@
+#!/usr/bin/env python3
+import sys
+
+
+_x_law = []
+_y_law = []
+_z_law = []
+
+
+def check_args():
+    if len(sys.argv) != 3 or sys.argv[1].isdigit() == False or sys.argv[2].isdigit() == False or int(sys.argv[1]) < 50 or int(sys.argv[2]) < 50:
+        print("USAGE:\n\t./202unsold a b\n\nDESCRIPTION\n\ta\tconstant computed from the past results\n\tb\t"
+              "constant computed from the past results")
+        return 1
+    else:
+        return 0
+
+
+def print_values(y_price):
+    a = int(sys.argv[1])
+    b = int(sys.argv[2])
+    x_price = 10
+    y_law = 0
+
+    new_arr = []
+    while x_price < 50:
+        res = (((a - x_price) * (b - y_price)) / ((5 * a - 150) * (5 * b - 150)))
+        print("%.3f" % res + "\t", end='')
+        y_law += res
+        x_price += 10
+        new_arr.append(res)
+    res = (((a - x_price) * (b - y_price)) / ((5 * a - 150) * (5 * b - 150)))
+    y_law += res
+    new_arr.append(res)
+    print("%.3f" % res + "\t" + "%.3f" % y_law)
+    _y_law.append(y_law)
+    return new_arr
+
+
+def print_xlaw(arr):
+    i = 0
+    print("X law\t", end='')
+
+    while i < 5:
+        j = 0
+        res = 0
+        while j < 5:
+            res += float(arr[j][i])
+            j += 1
+        print("%.3f" % res + "\t", end='')
+        _x_law.append(res)
+        i += 1
+    print("1")
+
+
+def print_p(arr):
+    res = float(arr[0][0])
+    res1 = float(arr[1][0]) + float(arr[0][1])
+    res2 = float(arr[2][0]) + float(arr[1][1]) + float(arr[0][2])
+    res3 = float(arr[2][1]) + float(arr[1][2]) + float(arr[0][3]) + float(arr[3][0])
+    res4 = float(arr[2][2]) + float(arr[3][1]) + float(arr[1][3]) + float(arr[0][4]) + float(arr[4][0])
+    res5 = float(arr[1][4]) + float(arr[4][1]) + float(arr[2][3]) + float(arr[3][2])
+    res6 = float(arr[2][4]) + float(arr[4][2]) + float(arr[3][3])
+    res7 = float(arr[3][4]) + float(arr[4][3])
+    res8 = float(arr[4][4])
+    _z_law.append(res)
+    _z_law.append(res1)
+    _z_law.append(res2)
+    _z_law.append(res3)
+    _z_law.append(res4)
+    _z_law.append(res5)
+    _z_law.append(res6)
+    _z_law.append(res7)
+    _z_law.append(res8)
+    print("p(Z=z)\t" + "%.3f" % res, end='\t')
+    print("%.3f" % res1 + "\t" + "%.3f" % res2 + "\t" + "%.3f" % res3 + "\t" + "%.3f" % res4 + "\t" + "%.3f" % res5 + "\t" + "%.3f" % res6 + "\t" + "%.3f" % res7 + "\t" + "%.3f" % res8, end='\t')
+    print("1")
+
+
+def print_x_exp():
+    x_value = 10
+    x_expect = 0
+    i = 0
+
+    print("expected value of X:", end='\t')
+    while x_value <= 50:
+        x_expect += x_value * _x_law[i]
+        x_value += 10
+        i += 1
+    print("%.1f" % x_expect)
+    return x_expect
+
+
+def print_x_var(x_expect):
+    x_var = 0
+    for j in range(0, 5):
+        x_var += _x_law[j] * pow(((j + 1) * 10) - x_expect, 2)
+    _var_x = x_var
+    print("variance of X:\t\t" + "%.1f" % x_var)
+    return x_var
+
+
+def print_y_exp():
+    y_value = 10
+    y_expect = 0
+    i = 0
+
+    print("expected value of Y:", end='\t')
+    while y_value <= 50:
+        y_expect += y_value * _y_law[i]
+        y_value += 10
+        i += 1
+    _expect_y = y_expect
+    print("%.1f" % y_expect)
+    return y_expect
+
+
+def print_y_var(y_expect):
+    y_var = 0
+
+    for j in range(0, 5):
+        y_var += _y_law[j] * pow(((j + 1) * 10) - y_expect, 2)
+    print("variance of Y:\t\t" + "%.1f" % y_var)
+    return y_var
+
+
+def print_z(x_exp, y_exp, x_var, y_var):
+    z_value = 20
+    z_expect = 0
+    z_var = 0
+    i = 0
+
+    print("expected value of Z:", end='\t')
+    z_expect = x_exp + y_exp
+    print("%.1f" % z_expect)
+    z_var = x_var + y_var
+    print("variance of Z:\t\t" + "%.1f" % z_var)
+
+
+def do_unsold():
+    y_price = 10
+    arr = []
+
+    print("--------------------------------------------------------------\n\tX=10\tX=20\tX=30\tX=40\tX=50\tY law")
+    while y_price <= 50:
+        print("Y=" + str(y_price) + "\t", end='')
+        arr.append(print_values(y_price))
+        y_price += 10
+    print_xlaw(arr)
+    print("--------------------------------------------------------------\nz\t20\t30\t40\t50\t60\t70\t80\t90\t100\ttotal")
+    print_p(arr)
+    print("--------------------------------------------------------------")
+    x_exp = print_x_exp()
+    x_var = print_x_var(x_exp)
+    y_exp = print_y_exp()
+    y_var = print_y_var(y_exp)
+    print_z(x_exp, y_exp, x_var, y_var)
+    print("--------------------------------------------------------------")
+
+
+def main():
+    if check_args() == 1:
+        exit(84)
+    do_unsold()
+
+
+main()

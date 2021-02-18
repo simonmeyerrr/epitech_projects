@@ -1,0 +1,16 @@
+tests/unit_tests
+
+ex01/mem_ptr.h
+ex03/func_ptr_enum.h
+ex04/castmania.h
+
+*/a.out
+*/main_test.c
+
+*vgcore*
+.idea
+*.o
+*.gcda
+*.gcno
+*~
+*#*

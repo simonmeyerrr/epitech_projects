@@ -1,0 +1,145 @@
+.orga--title {
+    font-size: 3vh;
+    margin-bottom: 2vh;
+}
+
+.orga--container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3vh;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 27vh;
+}
+
+.organisation--front {
+    transition: all 0.2s ease-out;
+    height: 5vh;
+    width: 20vh;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5vh;
+    margin-left: -0.75vh;
+    margin-top: -0.75vh;
+    position: absolute;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.organisation--front__hover {
+    transition: all 0.2s ease-out;
+    height: 5vh;
+    width: 20vh;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5vh;
+    margin-left: -0.01vh;
+    margin-top: -0.01vh;
+    position: absolute;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.organisation--back {
+    transition: all 0.2s ease-out;
+    height: 5vh;
+    width: 20vh;
+    margin-left: 0.75vh;
+    margin-top: 0.75vh;
+    position: relative;
+    z-index: 1;
+}
+
+.organisation--back__hover  {
+    transition: all 0.2s ease-out;
+    height: 5vh;
+    width: 20vh;
+    margin-left: 0.01vh;
+    margin-top: 0.01vh;
+    position: relative;
+    z-index: 1;
+}
+
+.organisation-container {
+    margin-bottom: 2vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+}
+
+.organisation-button {
+    height: 7vh;
+    background: transparent;
+}
+
+.orga--organisation--container {
+    padding-top: 2vh;
+    max-height: 60vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 4;
+    width: 120%;
+}
+
+.organisation-valid {
+    height: 3vh;
+}
+
+.orga--text-box {
+    margin-top: 2vh;
+    font-size: 2.5vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-left: 2vh;
+    padding-right: 1.5vh;
+    border-style: solid;
+    border-width: 0 0 0.5vh 0;
+    background-color: transparent;
+}
+
+.orga--add-button {
+    margin: 2vh;
+    padding: 1vh;
+    position: relative;
+}
+
+.orga--add-button__image {
+    transition: all 0.2s ease-out;
+    height: 2vh;
+}
+
+.orga--add-button__image__hover {
+    transition: all 0.2s ease-out;
+    height: 3vh;
+}
+
+.organisation-delet {
+    background-color: transparent;
+    margin-left: 1vh;
+}
+
+.organisation-delet--icon__none {
+    transition: all 0.2s ease-out;
+    height: 0vh;
+}
+
+.organisation-delet--icon {
+    transition: all 0.3s ease-out;
+    height: 3vh;
+}
+
+.organisation-delet--icon__hover {
+    transition: all 0.2s ease-out;
+    height: 4vh;
+}

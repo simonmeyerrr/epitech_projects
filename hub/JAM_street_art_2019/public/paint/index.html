@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>A Street Art Experience</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body onload="init()">
+
+    <div class= "test"></div>
+<div class = "centertxt ptittxt">
+    Status:
+    <span id="status"> ? </span>
+</div>
+
+<div class = "centertxt ptittxt">
+    Players:
+    <span id="players"> ? </span>
+</div>
+
+<div class="centercanvas">
+    <canvas id="canvas" width="800" height="400" style="border:2px solid;"></canvas>
+    <ul class="menu">
+       
+        <li><a id="line" onclick="SelectTool('line')">Pencil Tool</a></li>
+        <li><a id="circle" onclick="SelectTool('circle')">Circle Tool</a></li>
+        <li><a id="rectangle" onclick="SelectTool('rectangle')">Rectangle Tool</a></li>
+        <li><a><div class="sizePicker stylePicker">
+            Brush size: <span id="sizeText">5</span>
+            <input class="sizeSlider" type="range" name="sizeSlider" id="sizeSlider" value=5 min=1 max=10 onchange="selectSize(this)"/>
+        </div></a></li>
+        <li id="slider" class="slider"></li>
+      </ul>
+</div>
+
+
+<!--
+<div class="colorPicker">
+    <div class="colorTitle">
+        Choose Color
+    </div>
+    <div class="colorButton" style="background:#000000;" onclick="selectColor(this)"></div>
+    <div class="colorButton" style="background:#ffffff;" onclick="selectColor(this)"></div>
+    <div class="colorButton" style="background:#ff0000;" onclick="selectColor(this)"></div>
+    <div class="colorButton" style="background:#ffff00;" onclick="selectColor(this)"></div>
+    <div class="colorButton" style="background:#00ff00;" onclick="selectColor(this)"></div>
+    <div class="colorButton" style="background:#00ffff;" onclick="selectColor(this)"></div>
+    <div class="colorButton" style="background:#0000ff;" onclick="selectColor(this)"></div>
+    <div class="colorButton" style="background:#ff00ff;" onclick="selectColor(this)"></div>
+    Selected color: <div id="colorSelected" class="colorButton" style="background:#000000;"></div>
+</div>-->
+<div class= "tst">
+  <nav class='colorchoose'>
+    <input checked='checked' class='colorchoose-toggler' id='colorchoose-toggler' type='checkbox'>
+    <label for='colorchoose-toggler'></label>
+    <ul>
+      <li class='colorchoose-item'>
+        <a class="colorButton" style="background:#000000;" onclick="selectColor(this)"></a>
+      </li>
+      <li class='colorchoose-item'>
+        <a  class="colorButton" style="background:#ffffff;" onclick="selectColor(this)"></a>
+      </li>
+      <li class='colorchoose-item'>
+        <a class="colorButton" style="background:#ff0000;" onclick="selectColor(this)"></a>
+      </li>
+      <li class='colorchoose-item'>
+        <a class="colorButton" style="background:#ffff00;" onclick="selectColor(this)"></a>
+      </li>
+      <li class='colorchoose-item'>
+        <a class="colorButton" style="background:#00ff00;" onclick="selectColor(this)"></a>
+      </li>
+      <li class='colorchoose-item'>
+        <a class="colorButton" style="background:#00ffff;" onclick="selectColor(this)"></a>
+      </li>
+      <li class='colorchoose-item'>
+        <a class="colorButton" style="background:#0000ff;" onclick="selectColor(this)"></a>
+      </li>
+      <li class='colorchoose-item'>
+        <a class="colorButton" style="background:#ff00ff;" onclick="selectColor(this)"></a>
+      </li>
+    </ul>
+  </nav>
+  <div id="colorSelected" class="colorButtonSelected" style="background:#000000;"></div>
+</div>
+
+
+
+<!--<button onclick="clearCanvas()"> Clear Canvas </button>
+<button id="circle" onclick="SelectTool('circle')"> Circle Tool </button>
+<button id="rectangle" onclick="SelectTool('rectangle')"> Rectangle Tool </button>
+<button id="line" onclick="SelectTool('line')"> Pencil Tool </button>-->
+
+<script src="index.js"></script>
+</body>
+</html>

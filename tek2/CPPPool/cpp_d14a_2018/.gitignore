@@ -1,0 +1,16 @@
+a.out
+unit_tests
+main_test*
+RoverUnit
+RoverUnitTests.cpp
+
+.idea
+*.test
+*.o
+*.a
+*.gcda
+*.gcno
+*~
+*#*
+vgcore*
+CMakeList.txt

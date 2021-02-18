@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Epicture</string>
+    <string name="login_button">Login</string>
+    <string name="logout_button">Logout</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_profil">Profil</string>
+</resources>

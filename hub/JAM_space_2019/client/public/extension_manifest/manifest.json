@@ -1,0 +1,22 @@
+
+{
+  "short_name": "Pause",
+  "name": "Pause",
+  "description": "Go to pause ?",
+  "version": "1.0",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Pause"
+  },
+  "background": {
+    "scripts": [ "notification_script.js" ]
+  },
+  "permissions": [
+    "notifications",
+    "proxy",
+    "https://space.omnirem.dev/*",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self' ; object-src 'self'"
+}

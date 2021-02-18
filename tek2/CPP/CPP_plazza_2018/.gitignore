@@ -1,0 +1,15 @@
+plazza
+
+*.a
+*.o
+*.gcda
+*.gcno
+*~
+*#
+
+bootstrap
+.idea
+vgcore*
+CMakeLists.txt
+cmake*
+.vscode

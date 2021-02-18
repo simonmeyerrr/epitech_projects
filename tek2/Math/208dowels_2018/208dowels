@@ -1,0 +1,194 @@
+#!/usr/bin/env python3.6
+import sys
+import math
+
+
+obs = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+theo = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+dist_table = [[0, [99, 90, 80, 70, 60, 50, 40, 30, 20, 10, 5, 2, 1]],
+              [1, [0.00, 0.02, 0.06, 0.15, 0.27, 0.45, 0.71, 1.07, 1.64, 2.71, 3.84, 5.41, 6.63]],
+              [2, [0.02, 0.21, 0.45, 0.71, 1.02, 1.39, 1.83, 2.41, 3.22, 4.61, 5.99, 7.82, 9.21]],
+              [3, [0.11, 0.58, 1.01, 1.42, 1.87, 2.37, 2.95, 3.66, 4.64, 6.25, 7.81, 9.84, 11.34]],
+              [4, [0.30, 1.06, 1.65, 2.19, 2.75, 3.36, 4.04, 4.88, 5.99, 7.78, 9.49, 11.67, 13.28]],
+              [5, [0.55, 1.61, 2.34, 3.00, 3.66, 4.35, 5.13, 6.06, 7.29, 9.24, 11.07, 13.39, 15.09]],
+              [6, [0.87, 2.20, 3.07, 3.83, 4.57, 5.35, 6.21, 7.23, 8.56, 10.64, 12.59, 15.03, 16.81]],
+              [7, [1.24, 2.83, 3.82, 4.67, 5.49, 6.35, 7.28, 8.38, 9.80, 12.02, 14.07, 16.62, 18.48]],
+              [8, [1.65, 3.49, 4.59, 5.53, 6.42, 7.34, 8.35, 9.52, 11.03, 13.36, 15.51, 18.17, 20.09]],
+              [9, [2.09, 4.17, 5.38, 6.39, 7.36, 8.34, 9.41, 10.66, 12.24, 14.68, 16.92, 19.68, 21.67]],
+              [10, [2.56, 4.87, 6.18, 7.27, 8.30, 9.34, 10.47, 11.78, 13.44, 15.99, 18.31, 21.16, 23.21]]]
+
+
+def is_valid():
+    for i in range(1, len(sys.argv)):
+        if sys.argv[i].isdigit() is False or int(sys.argv[i]) <= 0:
+            return False
+    return True
+
+
+def check_obs():
+    if len(sys.argv) != 10 or is_valid() is False:
+        return False
+    else:
+        return True
+
+
+def calc_bino():
+    res = ((0 * int(obs[0])) + (1 * int(obs[1])) + (2 * int(obs[2])) + (3 * int(obs[3])) + (4 * int(obs[4])) + (5 * int(obs[5])) + (6 * int(obs[6])) + (7 * int(obs[7])) + (8 * int(obs[8]))) / 10000
+    return res
+
+
+def calc_eff(bino):
+    theo[0] = ((1 - bino) ** 100) * 100
+    theo[1] = (bino * ((1 - bino) ** 99) * 100) * 100
+    theo[2] = ((bino ** 2) * ((1 - bino) ** 98) * ((100 * 99) / 2)) * 100
+    theo[3] = ((bino ** 3) * ((1 - bino) ** 97) * ((100 * 99 * 98) / math.factorial(3))) * 100
+    theo[4] = ((bino ** 4) * ((1 - bino) ** 96) * ((100 * 99 * 98 * 97) / math.factorial(4))) * 100
+    theo[5] = ((bino ** 5) * ((1 - bino) ** 95) * ((100 * 99 * 98 * 97 * 96) / math.factorial(5))) * 100
+    theo[6] = ((bino ** 6) * ((1 - bino) ** 94) * ((100 * 99 * 98 * 97 * 96 * 95) / math.factorial(6))) * 100
+    theo[7] = ((bino ** 7) * ((1 - bino) ** 93) * ((100 * 99 * 98 * 97 * 96 * 95 * 94) / math.factorial(7))) * 100
+    theo[8] = 100 - (theo[0] + theo[1] + theo[2] + theo[3] + theo[4] + theo[5] + theo[6] + theo[7])
+
+
+def calc_chi():
+    res = 0.0
+    for i in range(0, 9):
+        res += pow((float(obs[i]) - float(theo[i])), 2) / float(theo[i])
+    print("Chi-squared:            %.3f" % res)
+
+
+class Case:
+    def __init__(self, arg_i, arg_v, arg_tx):
+        self.i = [arg_i]
+        self.v = [arg_v]
+        self.total_v = arg_v
+        self.tx = [arg_tx]
+        self.total_tx = arg_tx
+
+    def add(self, case):
+        if case.i[len(case.i) - 1] < self.i[0]:
+            self.i = case.i[:] + self.i
+            self.v = case.v[:] + self.v
+            self.tx = case.tx[:] + self.tx
+        else:
+            self.i += case.i
+            self.v += case.v
+            self.tx += case.tx
+        self.total_v += case.total_v
+        self.total_tx += case.total_tx
+
+    def display_i(self, end):
+        if end:
+            print("%d+   " % self.i[0], end="")
+        elif len(self.i) > 1:
+            print("%d" % self.i[0] + "-%d  " % self.i[len(self.i) - 1], end="")
+        else:
+            print("%d    " % self.i[0], end="")
+
+    def display_v(self):
+        print("%d" % self.total_v, end="")
+        if self.total_v == 100:
+            print("  ", end="")
+        elif self.total_v < 10:
+            print("    ", end="")
+        else:
+            print("   ", end="")
+
+    def display_tx(self):
+        print("%.1f" % self.total_tx, end="")
+        if self.total_tx < 10.0:
+            print("  ", end="")
+        elif self.total_tx != 100.0:
+            print(" ", end="")
+    i: [int]
+    v: [int]
+    total_v: int
+    tx: [float]
+    total_tx: float
+
+
+def check_cases(cases):
+    for i in range(0, len(cases)):
+        if cases[i].total_v < 10:
+            return False
+    return True
+
+
+def update_cases(cases):
+    i = 0
+    while cases[i].total_v >= 10:
+        i += 1
+    total_front = -1
+    total_back = -1
+    if i != 0:
+        total_front = cases[i].total_v + cases[i - 1].total_v
+    if i != len(cases):
+        total_back = cases[i].total_v + cases[i + 1].total_v
+    if total_front == -1 or total_front > total_back:
+        cases[i + 1].add(cases[i])
+    else:
+        cases[i - 1].add(cases[i])
+    cases.pop(i)
+    return cases
+
+
+def init_cases():
+    cases = []
+    for i in range(1, len(sys.argv)):
+        cases.append(Case(i - 1, int(sys.argv[i]), theo[i - 1]))
+    while check_cases(cases) is False:
+        cases = update_cases(cases)
+    print("   x   ", end="")
+    for i in range(0, len(cases)):
+        print(" | ", end="")
+        if i == len(cases) - 1:
+            cases[i].display_i(True)
+        else:
+            cases[i].display_i(False)
+    print(" | Total")
+    print("  Ox   ", end="")
+    total = 0
+    for i in range(0, len(cases)):
+        print(" | ", end="")
+        cases[i].display_v()
+        total += cases[i].total_v
+    print(" | %d" % total)
+    print("  Tx   ", end="")
+    total = 0.0
+    for i in range(0, len(cases)):
+        print(" | ", end="")
+        cases[i].display_tx()
+        total += cases[i].total_tx
+    print(" | %d" % total)
+    return cases
+
+
+def run_dowels():
+    bino = calc_bino()
+    calc_eff(bino)
+    freedom = len(init_cases()) - 2
+    print("Distribution:           B(100, %.4f" % bino + ")")
+    calc_chi()
+    print("Degrees of freedom:     " + str(freedom))
+    return 0
+
+
+def main():
+    if check_obs() is False:
+        print("Wrong arguments")
+        exit(84)
+    else:
+        obs[0] = sys.argv[1]
+        obs[1] = sys.argv[2]
+        obs[2] = sys.argv[3]
+        obs[3] = sys.argv[4]
+        obs[4] = sys.argv[5]
+        obs[5] = sys.argv[6]
+        obs[6] = sys.argv[7]
+        obs[7] = sys.argv[8]
+        obs[8] = sys.argv[9]
+        run_dowels()
+    return 0
+
+
+if __name__ == '__main__':
+    main()

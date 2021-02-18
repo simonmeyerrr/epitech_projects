@@ -1,0 +1,14 @@
+tests/unit_tests
+
+a.out
+main_test.c*
+
+Destination.hpp
+
+*vgcore*
+.idea
+*.o
+*.gcda
+*.gcno
+*~
+*#*

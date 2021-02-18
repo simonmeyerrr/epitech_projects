@@ -1,0 +1,15 @@
+A my_runner map must have 10 lines, each line end with '\n'.
+Every lines must have the same number of charactere.
+
+Only the characteres ' ', 'F', 'S', 'p', 'J', 'I', 'P', 'E' and '\n' are allowed.
+The map isn't valid if you use an other charactere.
+
+Every charactere represent a 'block' in the game:
+-' ' represent a 'void' block, there is no textures and no collisions with this block.
+-'F' represent a 'full' block. You can walk on this block. If you hit this block with your head while jumping, you'll just stop jumping and fall. If you walk into this block, you will die.
+-'S' represent a 'semi' block. You can walk on this block, but you wont die if you walk into it and your jump wont stop if you hit the block with your head.
+-'p' represent a 'pick' block. If you touch this block you will die.
+-'J' represent a 'jump' block. If you touch this block you'll have a second jump. You can use when you want but lose it when you touch the ground.
+-'I' represent an 'infinite jump' block. If you touch this block you'll have an infinite bonus jump. You lose the bonus when you touch the ground.
+-'P' represent the player. You can only place one 'P' on the map. This charactere have to be on the third column of the map.
+-'E' represent an 'end' block. If you touch this block, you win the game! You can only place one 'E' on the map.

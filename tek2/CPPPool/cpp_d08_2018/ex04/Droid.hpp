@@ -1,0 +1,54 @@
+/*
+** EPITECH PROJECT, 2018
+** cpp_d08_2018
+** File description:
+** Droid.hpp
+*/
+
+#ifndef CPP_D08_2018_DROID_HPP_
+# define CPP_D08_2018_DROID_HPP_
+
+# include <string>
+# include "DroidMemory.hpp"
+
+class Droid {
+public:
+    // Ctor and Dtor
+    Droid(std::string);
+    Droid(const Droid &);
+    ~Droid();
+
+    // Member functions
+    std::string getId() const;
+    size_t getEnergy() const;
+    size_t getAttack() const;
+    size_t getToughness() const;
+    std::string *getStatus() const;
+    DroidMemory *getBattleData() const;
+
+    void setId(std::string);
+    void setEnergy(size_t);
+    void setStatus(std::string *);
+    void setBattleData(DroidMemory *);
+
+    bool operator==(const Droid &) const;
+    bool operator!=(const Droid &) const;
+    void operator=(const Droid &);
+    void operator=(const size_t &);
+    Droid &operator<<(size_t &);
+
+    bool operator()(std::string *, size_t);
+
+private:
+    // Properties
+    std::string _id;
+    size_t _energy;
+    const size_t _attack;
+    const size_t _toughness;
+    std::string *_status;
+    DroidMemory *_battleData;
+};
+
+std::ostream &operator<<(std::ostream &stream, const Droid &droid);
+
+#endif /* CPP_D08_2018_DROID_HPP_ */

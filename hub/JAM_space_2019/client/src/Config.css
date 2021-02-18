@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:900&display=swap');
+
+.select-none {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+}
+
+.select-none-hard {
+    pointer-events: none;
+}
+
+.button {
+    cursor: pointer;
+    background-color: transparent;
+}
+
+input, button, submit, select {
+    border:none;
+    outline: none;
+}
+
+.main-font {
+    font-family: 'Bebas Neue';
+}
+
+.second-font {
+    font-family: 'Roboto Slab';
+}
+
+.main-color {
+    color: #D4F4F6;
+}
+
+.black-color {
+    color: #000000;
+}
+
+.white-color {
+    color: #ffffff;
+}
+
+.main-color--back {
+    background-color: #D4F4F6;
+}
+
+.black-color--back {
+    background-color: #000000;
+}
+
+.white-color--back {
+    background-color: #ffffff;
+}
+
+.main-color--border {
+    border-color: #D4F4F6;
+}
+
+.black-color--border {
+    border-color: #000000;
+}
+
+.white-color--border {
+    border-color: #ffffff;
+}
+
+.border {
+    border-style: solid;
+    border-width: 0.5vh;
+}

@@ -1,0 +1,14 @@
+a.out
+unit_tests
+main_test*
+
+.idea
+*.test
+*.o
+*.a
+*.gcda
+*.gcno
+*~
+*#*
+vgcore*
+CMakeList.txt
