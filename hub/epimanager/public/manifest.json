@@ -1,0 +1,36 @@
+{
+	"short_name": "EpiManager",
+	"name": "Epitech Manager",
+	"description": "L'utilitaire Epitech indispensable !",
+	"version": "2.0",
+
+	"manifest_version": 2,
+	"browser_action": {
+		"default_popup": "index.html",
+		"default_title": "EpiManager",
+		"default_icon": {
+			"16": "16.png",
+			"48": "48.png",
+			"96": "96.png",
+			"128": "128.png"
+		}
+	},
+	"background": {
+		"scripts": ["background_update.js", "background_notif.js"]
+	},
+	"icons": {
+		"16": "16.png",
+		"48": "48.png",
+		"96": "96.png",
+		"128": "128.png"
+	},
+	"permissions": [
+		"notifications",
+		"proxy",
+		"https://intra.epitech.eu/*",
+		"tabs"
+	],
+	"web_accessible_resources": [
+		"48.png"
+	]
+}

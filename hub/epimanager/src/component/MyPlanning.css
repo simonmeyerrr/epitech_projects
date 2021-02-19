@@ -1,0 +1,11 @@
+.MyPlanning {
+	width: 100%;
+}
+
+.day_title {
+	background-color: #337ab7;
+	color: white;
+	width: 300;
+	padding: 3px 5px;
+	fontSize: 18px;
+}

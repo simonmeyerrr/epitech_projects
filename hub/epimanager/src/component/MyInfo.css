@@ -1,0 +1,19 @@
+.MyInfo {
+	width: 100%;
+	height: 100%;
+	font-size: 17px;
+}
+
+.profil_image {
+	float: left;
+	width: 75px;
+	height: 90px;
+}
+
+.profil_info {
+	width: 225px;
+	height: 90px;
+	text-align: center;
+	overflow-y: auto;
+	padding: 7px 0px;
+}

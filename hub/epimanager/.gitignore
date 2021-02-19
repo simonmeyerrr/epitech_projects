@@ -1,0 +1,4 @@
+build/*
+epimanager.zip
+node_modules/
+.idea/
