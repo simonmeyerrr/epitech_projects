@@ -1,0 +1,11 @@
+.navbar-colored {
+    background-color: #c0392b;
+}
+
+.navbar-colored a {
+    color: white !important;
+}
+
+.card-head {
+    margin-top: 10px;
+}

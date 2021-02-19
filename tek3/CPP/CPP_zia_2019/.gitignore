@@ -1,0 +1,20 @@
+# builds
+build/
+cmake-build-*/
+zia
+zia.exe
+*.so
+*.dll
+*.dlyb
+
+# IDE's folders
+.idea
+.vs
+.vscode
+
+# useless files
+*~
+*#
+vgcore*
+.DS_Store
+CmakeSettings.json

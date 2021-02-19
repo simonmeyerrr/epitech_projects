@@ -1,0 +1,45 @@
+{
+    "network": {
+        "path": "./modules/",
+        "name": "SecureNetwork",
+        "port": 8080,
+        "ssl-certificate": "./resources/ssl/cert.pem",
+        "ssl-certificate-key": "./resources/ssl/key.pem"
+    },
+    "http": [{
+        "path": "./modules/",
+        "name": "HttpReceiver"
+    }, {
+        "path": "./modules/",
+        "name": "Snek",
+        "resolution": [800, 600],
+        "apple frequency": 1,
+        "snake speed": 12
+    }, {
+        "path": "./modules/",
+        "name": "FileServer",
+        "url": "./resources/website"
+    }, {
+        "path": "./modules/",
+        "name": "PhpCgi",
+        "bin": "/usr/bin/php-cgi",
+        "files": "./resources/website/",
+        "interpreted": [
+            ".php",
+            ".php3",
+            ".php5",
+            ".php7",
+            ".inc",
+            ".module"
+        ]
+    }, {
+        "path": "./modules/",
+        "name": "HttpSender",
+        "close": false
+    }],
+    "logger": {
+        "path": "./modules/",
+        "name": "ConsoleLogger",
+        "debug": true
+    }
+}

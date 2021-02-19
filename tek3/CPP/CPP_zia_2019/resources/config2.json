@@ -1,0 +1,32 @@
+{
+    "http": [{
+        "name": "HttpReceiver", 
+        "path": "./modules/"
+    }, {
+        "name": "FileServer", 
+        "path": "./modules/", 
+        "url": "./resources/website"
+    }, {
+        "bin": "/usr/bin/php-cgi", 
+        "files": "./resources/website/", 
+        "interpreted": [".php", ".php3", ".php5", ".php7", ".inc", ".module"], 
+        "name": "PhpCgi", 
+        "path": "./modules/"
+    }, {
+        "alive": false, 
+        "name": "HttpSender", 
+        "path": "./modules/"
+    }], 
+    "logger": {
+        "debug": true, 
+        "name": "ConsoleLogger", 
+        "path": "./modules/"
+    }, 
+    "network": {
+        "name": "SecureNetwork",
+        "path": "./modules/", 
+        "port": 8080, 
+        "ssl-certificate": "./resources/ssl/cert.pem", 
+        "ssl-certificate-key": "./resources/ssl/key.pem"
+    }
+}
